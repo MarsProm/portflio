@@ -19,6 +19,19 @@ Minimal Django portfolio project focused on presenting a personal profile, featu
 - Custom CSS
 - Vanilla JavaScript
 
+## Deploy
+
+This project is prepared for Render deployment with:
+
+- `requirements.txt`
+- `build.sh`
+- `render.yaml`
+
+Render docs used as reference:
+
+- https://render.com/docs/deploy-django
+- https://render.com/docs/configure-environment-variables
+
 ## Local setup
 
 ```bash
@@ -64,3 +77,4 @@ portflio/
 
 - Contact flow uses WhatsApp instead of a database contact form
 - Scroll reveal behavior is implemented in `static/js/main.js`
+- Production settings use environment variables and WhiteNoise for static files
