@@ -32,6 +32,7 @@ Render docs used as reference:
 
 - https://render.com/docs/deploy-django
 - https://render.com/docs/configure-environment-variables
+- https://render.com/docs/ssh
 
 ## Local setup
 
@@ -80,3 +81,4 @@ portflio/
 - Scroll reveal behavior is implemented in `static/js/main.js`
 - Production settings use environment variables and WhiteNoise for static files
 - Render blueprint provisions Postgres and injects `DATABASE_URL` into Django
+- On Render free plan, shell/SSH is not available; superuser can be created via env vars during deploy
