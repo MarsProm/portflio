@@ -26,6 +26,7 @@ This project is prepared for Render deployment with:
 - `requirements.txt`
 - `build.sh`
 - `render.yaml`
+- managed Postgres connection through `DATABASE_URL`
 
 Render docs used as reference:
 
@@ -78,3 +79,4 @@ portflio/
 - Contact flow uses WhatsApp instead of a database contact form
 - Scroll reveal behavior is implemented in `static/js/main.js`
 - Production settings use environment variables and WhiteNoise for static files
+- Render blueprint provisions Postgres and injects `DATABASE_URL` into Django
