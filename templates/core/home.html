@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}Home | {{ profile.full_name|default:"Portfolio" }}{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="container hero-grid">
+        <div class="reveal" data-reveal-delay="0">
+            <p class="eyebrow">Portfolio MVP</p>
+            <h1>{{ profile.full_name|default:"Your Name" }}</h1>
+            <p class="hero-title">{{ profile.title|default:"Django Developer" }}</p>
+            <p class="hero-copy">
+                {{ profile.short_bio|default:"I build clean, modern web experiences with a strong focus on simple and effective products." }}
+            </p>
+            <div class="hero-actions">
+                <a class="button button-primary" href="#projects">View Projects</a>
+                <a class="button button-secondary" href="#contact">Contact Me</a>
+                <a class="button button-whatsapp" href="{{ whatsapp_url }}" target="_blank" rel="noopener">WhatsApp</a>
+            </div>
+            <div class="social-links">
+                {% if profile.github_url %}<a href="{{ profile.github_url }}" target="_blank" rel="noopener">GitHub</a>{% endif %}
+                {% if profile.linkedin_url %}<a href="{{ profile.linkedin_url }}" target="_blank" rel="noopener">LinkedIn</a>{% endif %}
+                {% if profile.cv_url %}<a href="{{ profile.cv_url }}" target="_blank" rel="noopener">CV</a>{% endif %}
+            </div>
+        </div>
+        <div class="hero-card reveal" data-reveal-delay="120">
+            {% if profile and profile.profile_image %}
+                <img src="{{ profile.profile_image.url }}" alt="{{ profile.full_name }}" class="profile-image">
+            {% else %}
+                <div class="image-placeholder">Profile Image</div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<section class="section" id="about">
+    <div class="container section-grid">
+        <div class="section-heading reveal">
+            <p class="eyebrow">About</p>
+            <h2>Who I am</h2>
+        </div>
+        <div class="card reveal" data-reveal-delay="100">
+            <p>{{ profile.about_text|default:"Add your longer introduction in the Django admin to describe your experience, focus, and the kind of work you enjoy."|linebreaks }}</p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-heading reveal">
+            <p class="eyebrow">Skills</p>
+            <h2>Tools I use</h2>
+        </div>
+        <div class="skills-list">
+            {% for skill in skills %}
+                <span class="skill-pill reveal" data-reveal-delay="{{ forloop.counter0|add:1 }}0">{{ skill }}</span>
+            {% empty %}
+                <span class="skill-pill reveal" data-reveal-delay="40">Django</span>
+                <span class="skill-pill reveal" data-reveal-delay="80">Python</span>
+                <span class="skill-pill reveal" data-reveal-delay="120">HTML</span>
+                <span class="skill-pill reveal" data-reveal-delay="160">CSS</span>
+                <span class="skill-pill reveal" data-reveal-delay="200">SQLite</span>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section" id="projects">
+    <div class="container">
+        <div class="section-header-row">
+            <div class="section-heading reveal">
+                <p class="eyebrow">Projects</p>
+                <h2>Featured work</h2>
+            </div>
+            <a class="button button-secondary reveal" data-reveal-delay="80" href="{% url 'projects' %}">See All</a>
+        </div>
+        <div class="projects-grid">
+            {% for project in featured_projects %}
+                <article class="project-card reveal" data-reveal-delay="{{ forloop.counter }}00">
+                    {% if project.image %}
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-image">
+                    {% else %}
+                        <div class="project-image placeholder">Project Preview</div>
+                    {% endif %}
+                    <div class="project-content">
+                        <p class="project-stack">{{ project.tech_stack }}</p>
+                        <h3>{{ project.title }}</h3>
+                        <p>{{ project.short_description }}</p>
+                        <div class="project-links">
+                            {% if project.github_url %}<a href="{{ project.github_url }}" target="_blank" rel="noopener">GitHub</a>{% endif %}
+                            {% if project.demo_url %}<a href="{{ project.demo_url }}" target="_blank" rel="noopener">Live Demo</a>{% endif %}
+                        </div>
+                    </div>
+                </article>
+            {% empty %}
+                <div class="card empty-state reveal">
+                    <p>Add featured published projects from Django admin to display them here.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section" id="contact">
+    <div class="container section-grid">
+        <div class="section-heading reveal">
+            <p class="eyebrow">Contact</p>
+            <h2>Let's work together</h2>
+            <p class="section-copy">
+                If you have a project in mind, send me a message on WhatsApp and I will get back to you.
+            </p>
+        </div>
+        <div class="card reveal" data-reveal-delay="100">
+            <div class="contact-panel">
+                <p>Fastest contact channel.</p>
+                <h3>WhatsApp Direct</h3>
+                <p>Open chat with preloaded message and start conversation in one click.</p>
+                <a class="button button-whatsapp" href="{{ whatsapp_url }}" target="_blank" rel="noopener">Open WhatsApp</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

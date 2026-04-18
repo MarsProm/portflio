@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Projects | {{ profile.full_name|default:"Portfolio" }}{% endblock %}
+
+{% block content %}
+<section class="section page-section">
+    <div class="container">
+        <div class="section-heading reveal">
+            <p class="eyebrow">Projects</p>
+            <h1>All Published Projects</h1>
+            <p class="section-copy">Featured projects are listed first, followed by the rest of the published work.</p>
+        </div>
+        <div class="projects-grid">
+            {% for project in projects %}
+                <article class="project-card reveal" data-reveal-delay="{{ forloop.counter }}00">
+                    {% if project.image %}
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-image">
+                    {% else %}
+                        <div class="project-image placeholder">Project Preview</div>
+                    {% endif %}
+                    <div class="project-content">
+                        {% if project.is_featured %}
+                            <span class="featured-badge">Featured</span>
+                        {% endif %}
+                        <p class="project-stack">{{ project.tech_stack }}</p>
+                        <h3>{{ project.title }}</h3>
+                        <p>{{ project.description|truncatechars:180 }}</p>
+                        <div class="project-links">
+                            {% if project.github_url %}<a href="{{ project.github_url }}" target="_blank" rel="noopener">GitHub</a>{% endif %}
+                            {% if project.demo_url %}<a href="{{ project.demo_url }}" target="_blank" rel="noopener">Live Demo</a>{% endif %}
+                        </div>
+                    </div>
+                </article>
+            {% empty %}
+                <div class="card empty-state reveal">
+                    <p>No published projects yet. Add them from Django admin.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

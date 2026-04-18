@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Contact | {{ profile.full_name|default:"Portfolio" }}{% endblock %}
+
+{% block content %}
+<section class="section page-section">
+    <div class="container section-grid">
+        <div class="section-heading reveal">
+            <p class="eyebrow">Contact</p>
+            <h1>Contact Me</h1>
+            <p class="section-copy">Best way to reach me is WhatsApp. Tap button below to start chat with prefilled message.</p>
+        </div>
+        <div class="card reveal" data-reveal-delay="100">
+            <div class="contact-panel">
+                <p>WhatsApp Number</p>
+                <h3>+54 385 493 2369</h3>
+                <p>{{ whatsapp_message }}</p>
+                <a class="button button-whatsapp" href="{{ whatsapp_url }}" target="_blank" rel="noopener">Open WhatsApp</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
